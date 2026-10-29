@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 
 import CheckInPage from './CheckInPage.tsx';
 
@@ -32,11 +32,7 @@ function getLoginUrl(returnTo: string): string {
   return loginUrl.toString();
 }
 
-type AuthContentProps = {
-  children?: ReactNode;
-};
-
-function AuthScreen({ children = <CheckInPage /> }: AuthContentProps) {
+function AuthScreen() {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -89,7 +85,7 @@ function AuthScreen({ children = <CheckInPage /> }: AuthContentProps) {
     );
   }
 
-  return children;
+  return <CheckInPage computingId={user.computing_id} />;
 }
 
 export default AuthScreen;
